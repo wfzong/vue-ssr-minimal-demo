@@ -1,11 +1,24 @@
 <template>
-  <div>HOME {{name}} <input v-model="name" /></div>
+  <div>
+    <h3>文章列表</h3>
+    <div class="list" v-for="i in list">
+      <router-link :to="{path:'/item/'+i.id}">{{i.title}}</router-link>
+      </div>
+  </div>
 </template>
 <script>
 export default {
-  data () {
+  asyncData ({store, route}){
+    return store.dispatch('fetchList')
+  },
+  computed: {
+    list () {
+      return this.$store.state.list
+    }
+  },
+  data(){
     return {
-      name: 'vue ssr'
+      name:'wfz'
     }
   }
 }
